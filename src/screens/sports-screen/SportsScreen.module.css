@@ -1,0 +1,28 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+}
+
+.sectionTitle {
+  color: #ffe032;
+  font-size: 4rem;
+}
+
+.subTitle {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.error {
+  font-size: 2rem;
+  color: #fff;
+}
