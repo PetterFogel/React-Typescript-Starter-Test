@@ -9,7 +9,7 @@ const DishScreen: FC = () => {
 
   useEffect(() => {
     sendRequest({
-      url: "http://localhost:3000/dishes",
+      url: `${process.env.REACT_APP_API_BASEURL}/dishes`,
       method: "GET",
     });
   }, []);

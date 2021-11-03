@@ -9,7 +9,7 @@ const SportsScreen: FC = () => {
 
   useEffect(() => {
     sendRequest({
-      url: "http://localhost:3000/sports",
+      url: `${process.env.REACT_APP_API_BASEURL}/sports`,
       method: "GET",
     });
   }, []);

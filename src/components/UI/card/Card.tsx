@@ -13,7 +13,7 @@ const Card: FC<CardProps> = ({ resourceItem, path }: CardProps) => {
 
   const clickHandler = () => {
     sendRequest({
-      url: `http://localhost:3000/${path}/${resourceItem.id}`,
+      url: `${process.env.REACT_APP_API_BASEURL}/${path}/${resourceItem.id}`,
       method: "DELETE",
       itemId: resourceItem.id,
     });
