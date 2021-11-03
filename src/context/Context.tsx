@@ -17,7 +17,7 @@ const Context = createContext<ContextProps>({
   sendRequest: (requestObject: RequestObject) => {},
 });
 
-export const ContextProvider: FC = (props) => {
+export const ContextProvider: FC = ({ children }) => {
   const [data, setData] = useState<Resource[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,21 +26,24 @@ export const ContextProvider: FC = (props) => {
     setIsLoading(true);
     await asyncDelay(1000);
     try {
+      setError(null);
       const response = await fetch(url, { method });
 
       if (!response.ok) throw Error("Oops! Something went wrong...");
       if (method === "DELETE") {
+        setError(null);
+        setIsLoading(false);
         setData((prevData) => {
           return prevData.filter((resource) => resource.id !== itemId);
         });
-        return setIsLoading(false);
+
+        return;
       }
 
       const data = await response.json();
 
       setData(data);
       setIsLoading(false);
-      setError(null);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -57,9 +60,7 @@ export const ContextProvider: FC = (props) => {
     sendRequest: sendRequestHandler,
   };
 
-  return (
-    <Context.Provider value={contextValue}>{props.children}</Context.Provider>
-  );
+  return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
 
 export default Context;
